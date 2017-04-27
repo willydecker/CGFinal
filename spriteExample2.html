@@ -1,0 +1,42 @@
+<html>
+<head>
+<h1> Sprite Demo </h1>
+</head>
+<body onload="init();">
+	<canvas id="demoCanvas" width="960" height="700">
+		alternate content
+	</canvas>
+</body>
+<script src="../easelJS/lib/easeljs-0.8.2.combined.js"></script>
+
+<script>
+function init(){
+img = new Image();
+var canvas = document.getElementById("demoCanvas");
+var stage = new createjs.Stage("demoCanvas");	
+img.src = 'handsSprite.ss.png';
+img.onload = function(event) {
+    var data = {
+        framerate: 25,
+        images: [img],
+        frames: {width:100, height:100, regX:50, regY:50},
+        animations: {
+            'handWave': [0, 1],
+        }
+    }
+ 
+    var spritesheet = new createjs.SpriteSheet(data);
+    var animation = new createjs.Sprite(spritesheet, 'handWave');
+    animation.x = canvas.width/2;
+    animation.y = canvas.height/2;
+ 
+    stage.addChild(animation);
+ 
+    createjs.Ticker.addEventListener("tick", update);
+    function update(event) {
+        stage.update();
+    }
+}
+}
+</script>
+</html>

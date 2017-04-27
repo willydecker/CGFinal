@@ -1,0 +1,67 @@
+<html>
+<head>
+<h1> Will's Sprite Demo </h1>
+<h3>Stop the infestation!</h3>
+</head>
+<body onload="init();">
+	<canvas id="demoCanvas" width="500" height="500">
+		alternate content
+	</canvas>
+</body>
+<script src="../final/easelJS/lib/easeljs-0.8.2.combined.js"></script>
+
+<script>
+    var stage, mouseTarget, clicked, mouse1, mouse2, mouse3;
+    var tweenmouse1, tweenmouse2, tweenmouse3;
+    var img;
+    var x  ;
+    var y ;
+    function init(){
+        stage = new createjs.Stage("demoCanvas");    
+        img = new Image();
+        img.src = 'mouse.png';
+        img.onload = loadMice;
+    }
+
+    class Mouse {
+        position(){
+            this.x = demoCanvas.width + Math.random()*500;
+            this.y = demoCanvas.height * Math.random()|0 + 10;;
+            this.moveDistance = (Math.random()*7)+4; //just some random distance
+        }
+    }
+
+    function loadMice(event){   
+        var image = event.target;
+        var container = new createjs.Container();
+        var i = 0;
+
+        /*while (i < 5) {
+            mouse = new createjs.Bitmap(image);
+            positionMouse(mouse)
+            mouse.regX = mouse.image.width/2|0;
+            mouse.regY = mouse.image.height/2|0;
+            container.addChild(mouse);
+            i++;
+        }*/
+
+        var a = new Mouse();
+        a.position();
+
+        container.addChild(a);
+
+        stage.addChild(container); 
+        createjs.Ticker.addEventListener("tick", handleTick);
+        stage.update();
+    }
+ 
+    function handleTick(){
+            if(Mouse.x > -100){
+                Mouse.x -= mouse.moveDistance;
+            }
+            stage.update();
+        }
+    //RUN THE PROGRAM
+    init();
+</script>
+</html>

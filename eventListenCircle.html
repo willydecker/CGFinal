@@ -1,0 +1,29 @@
+<head>
+	<h1> Easel JS Intro</h1>>
+</head>
+<body onload="init();">
+	<canvas id="canvas" width="900" height="700">
+		alternate content
+	</canvas> 
+</body>
+
+<script src="../easelJS/lib/easeljs-0.8.2.combined.js"></script>
+<script src="../tweenJS/lib/tweenjs-0.6.2.combined.js"></script>
+<script>
+var canvas = document.getElementById("canvas");   
+var stage = new createjs.Stage(canvas);   
+function init(){ 
+	var circle = new createjs.Shape(); 
+	circle.graphics.beginFill('#0000FF').drawCircle(0, 0, 50); 
+	circle.x = stage.canvas.width / 2; 
+	circle.y = stage.canvas.height / 2; 
+	circle.name = 'Blue Circle'; 
+	stage.addChild(circle); 
+	stage.update();   
+	circle.addEventListener('dblclick', function (e) {    
+		alert(e.target + ' was double clicked!'); 
+	});
+}
+</script>
+
+</html>

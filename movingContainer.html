@@ -1,0 +1,95 @@
+<html>
+<head>
+<h1> Container Demo </h1>
+</head>
+<body onload="init();">
+	<canvas id="demoCanvas" width="960" height="700">
+		alternate content
+	</canvas>
+</body>
+<script src="../final/easelJS/lib/easeljs-0.8.2.combined.js"></script>
+
+<script>
+var stage, mouseTarget, clicked, sub1, sub2, sub3;
+var tweenSub1, tweenSub2, tweenSub3;
+var img;
+var x  ;
+var y ;
+function init(){
+	stage = new createjs.Stage("demoCanvas");	 
+	img = new Image();
+	img.src = 'mouse.png';
+	img.onload = loadSubs;
+}
+
+function loadSubs(event){	
+var image = event.target;
+var container = new createjs.Container();
+sub1 = new createjs.Bitmap(image);
+sub1.name = "uBoat1";
+sub2 = new createjs.Bitmap(image);
+sub2.name = "uBoat2";
+sub3 = new createjs.Bitmap(image);
+sub3.name = "uBoat3"; 
+positionSub(sub1);
+positionSub(sub2);
+positionSub(sub3);
+
+ sub1.regX = sub1.image.width/2|0;
+ sub1.regY = sub1.image.height/2|0;
+
+ sub2.regX = sub1.image.width/2|0;
+ sub2.regY = sub1.image.height/2|0;
+
+ sub3.regX = sub1.image.width/2|0;
+ sub3.regY = sub1.image.height/2|0;
+
+ 
+container.addChild(sub1); 
+container.addChild(sub2);
+container.addChild(sub3);
+stage.addChild(container); 
+createjs.Ticker.addEventListener("tick", handleTick);
+stage.update();
+}
+
+
+
+function positionSub(sub){
+	sub.x = demoCanvas.width + Math.random()*500;
+	sub.y = demoCanvas.height * Math.random()|0 + 10;;
+	sub.moveDistance = (Math.random()*7)+4; //just some random distance
+}
+
+function handleTick(){
+	// if(stage.mouseX && stage.mouseY)
+	// {
+	// 	mouseTarget = stage.getObjectUnderPoint(stage.mouseX, stage.mouseY);
+	// 	if(clicked && mouseTarget != null)
+	// 	resetUBoat(mouseTarget);
+	// }
+	//stage.addChild(text);
+	if(sub1.x > -100){
+		sub1.x -= sub1.moveDistance;
+	}
+
+	if(sub2.x > -100){
+		sub2.x -= sub2.moveDistance;
+	}
+
+	if(sub3.x > -100){
+		sub3.x -= sub3.moveDistance;
+	}
+	stage.update();
+}
+
+
+ 
+
+
+
+
+init();
+</script>
+
+</html>

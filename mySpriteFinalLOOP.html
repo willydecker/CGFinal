@@ -1,0 +1,75 @@
+<html>
+<head>
+<h1> Will's Sprite Demo </h1>
+<h3>Stop the infestation!</h3>
+</head>
+<body onload="init();">
+	<canvas id="demoCanvas" width="750" height="750">
+		alternate content
+	</canvas>
+</body>
+<script src="../final/easelJS/lib/easeljs-0.8.2.combined.js"></script>
+
+<script>
+    var stage, mouseTarget, clicked, mouse1, mouse2, mouse3;
+    var tweenmouse1, tweenmouse2, tweenmouse3;
+    var img;
+    var x  ;
+    var y ;
+    function init(){
+        stage = new createjs.Stage("demoCanvas");    
+        img = new Image();
+        img.src = 'mouse.png';
+        img.onload = loadMice;
+    }
+
+    function loadMice(event){   
+        var image = event.target;
+        var container = new createjs.Container();
+        
+        var mouse = [];
+
+        for (var i = 0; i < 25; i++) {
+            mouse[i] = new createjs.Bitmap(image);
+
+            positionMouse(mouse[i]);
+
+            mouse[i].regX = mouse[i].image.width/2|0;
+            mouse[i].regY = mouse[i].image.height/2|0;
+
+            container.addChild(mouse[i]);
+        }
+
+        stage.addChild(container); 
+        createjs.Ticker.addEventListener("tick", handleTick);
+        stage.addEventListener("click", handleClick);
+
+        stage.update();
+
+        function handleTick(){
+            for (each in mouse){
+                if(mouse[each] > -100){
+                    mouse[each].x -= mouse[each].moveDistance;
+                }
+            }
+            stage.update();
+            }
+        }
+
+    function positionMouse(mouse){
+        mouse.x = demoCanvas.width + Math.random()*500;
+        mouse.y = demoCanvas.height * Math.random()|0 + 10;;
+        mouse.moveDistance = (Math.random()*7)+4; //just some random distance
+    }
+
+    function handleClick(){ //when clicked on mouse
+        console.log("proving that it works");
+        stage.removeChild(Object); ////THIS WONT WORK
+    }
+
+    
+
+    //RUN THE PROGRAM
+    init();
+</script>
+</html>
